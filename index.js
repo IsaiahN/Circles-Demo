@@ -1,6 +1,4 @@
-	iterateCircles();
-	  
-	function iterateCircles(mode = "random"){
+  	function iterateCircles(mode = "random"){
 	        /* Get List of Circles by ID and grouped by class into an array */
 			var circle_list = document.getElementById("circle_set");
 	        var circle_arr  = circle_list.getElementsByTagName('li');

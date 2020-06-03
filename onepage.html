@@ -1,0 +1,160 @@
+<html>
+	<head>
+		<title>Circles | Cryptic Studios | UI Art Challenge</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="shortcut icon" href="https://www.crypticstudios.com/img/favicon.ico" />
+	</head>
+	<body>
+		<nav id="nav">
+			<div id="left_section">
+				<img src="https://www.crypticstudios.com/img/logo_cryptic.png" alt="Cryptic Studios Demo" />
+				<span>| UI Art Challenge</span>
+			</div>
+			<ul id="right_section">
+				<li><a href="https://www.crypticstudios.com/games" title="Games">Games</a></li>
+				<li><a href="https://www.crypticstudios.com/contact" title="Contact">Contact</a></li>
+				<li><a href="https://www.crypticstudios.com/careers" title="Careers">Careers</a></li>
+				<li><a href="https://www.linkedin.com/in/isaiahnwukor" title="Isaiah's Linkedin">Resume</a></li>
+			</ul>
+		</nav>
+		<div id="wrapper">
+			<ul id="circle_set">
+				<li class="red"></li>
+				<li class="blue"></li>
+				<li class="yellow"></li>
+				<li class="green"></li>
+			</ul>
+
+			<div id="button_set">
+				<button onclick="iterateCircles('reset')">Reset</button>
+				<button onclick="iterateCircles('finish')">Finish</button>
+			</div>
+		</div>
+		<style>
+		/*
+        * Author: Isaiah Nwukor
+        * UI Art Challenge
+        */
+    
+        /* Fonts */
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans|Prata&display=swap');
+        
+        /* Navigation */
+        #nav {z-index:1;position:fixed;width:96%;box-shadow:0 1px 7px -4px #252525;border-bottom: 1px solid #111;height:80px;background:#000904;padding: 0 2%;}
+        #nav #left_section {float:left;line-height:80px;font-size:20pt;}
+        #nav #left_section img {max-height:80px;vertical-align:middle;}
+        #nav #right_section {float:right;}
+        #nav ul {display:inline-flex;list-style:none;margin:0;}
+        #nav ul li {margin:0 15px;line-height:80px;}
+        #nav ul li a {color:#ffffff;text-decoration:none;}
+        #nav ul li a:hover {color:#d66518;}
+        #nav img {width:120px;}
+        #nav span {color:#d0d0d0;}
+        
+        /* Main Styles */
+        body {background:#e9e9e9;font-family: 'Open Sans', sans-serif;width: 100%;}
+        body, html {margin:0;padding:0;}
+        h1, h2, h3, h4, h5, h6, #nav, ul, table {font-family: "Open Sans", sans-serif;}
+        a {text-decoration:none; color:#493fa9;}
+        a:hover {color:#411463;cursor:pointer;text-decoration:underline;}
+           
+        /* Circle Set */
+        ul#circle_set {padding-top:120px;margin: 0 auto;width:600px;}
+        ul#circle_set li {list-style:none;}
+        ul#circle_set li {border: 5px solid transparent;border-radius:100%;width:calc(50% - 40px);height:250px;display:inline-block;margin:10px;}
+        ul#circle_set li.active {border: 5px solid #17141426;}
+    
+        /* Circle Set - Colors */
+        ul#circle_set li.active.red {background:#c23e21;}
+        ul#circle_set li.active.blue {background:#345698;}
+        ul#circle_set li.active.yellow {background:#ffe002;}
+        ul#circle_set li.active.green {background:#0a6d3e;}
+        
+        /* Button Section */
+        div#button_set {width:98%;background:#00090478;padding:15px 1%;text-align:center;margin-top:20px;position:fixed;bottom:0px;}
+        div#button_set button {background:#616b5e;color:#ffffff;text-transform:uppercase;letter-spacing:3px;border-radius:7px;margin:5px;padding:10px 40px;font-size:18px;border:1px solid #312d2d4d;}
+        div#button_set button:last-child {background:#63b92d;}
+        div#button_set button:hover {background:#434348;cursor:pointer;}
+        
+    
+        
+        @media only screen and (max-width:860px) {
+            #nav ul {
+                background:#000904;
+                width: 100%;
+                position:relative;
+                left:3%;
+                border-top:1px solid #e9e9e92b;
+            }
+            ul#circle_set {
+                padding-left:0;
+                padding-right:0;
+                padding-top:200px;
+                width:80%;
+                text-align:center;
+            }
+            ul#circle_set li{
+                width: 39%;
+                height: 30vw;
+                margin: 3.5%;
+            }
+        }
+        @media only screen and (max-width:400px) {
+            #nav span {
+                display:none;
+            }
+            #nav #left_section {
+                text-align:center;
+                margin:0 auto;
+                display:block;   
+                float:initial;
+                width:200px;
+                padding:20px;
+            }
+            ul#circle_set {width: 100%;}
+            ul#circle_set li {width:calc(50% - 40px);}
+        }
+		</style>
+		<script type="text/javascript">
+        	/* Kick off the function */
+        	iterateCircles();
+        	  
+        	function iterateCircles(mode = "random"){
+        	        /* Get List of Circles by ID and grouped by class into an array */
+        			var circle_list = document.getElementById("circle_set");
+        	        var circle_arr  = circle_list.getElementsByTagName('li');
+        	        if(mode.toLowerCase() == "random") {
+                    	/*Creates a Numbered array and then shuffles that instead of index.*/
+                    	var list = new Array();
+                    	for (i = 0; i < circle_arr.length; i++) {
+                    	    list.push(Math.abs(i));
+                    	}
+                    	list.sort(() => Math.random() - 0.5);
+            	  
+                        /* Loop Through Array and Check Class status if active */
+                        for (i = 0; i < circle_arr.length; ++i) {
+                            	if (!circle_arr[list[i]].className.includes("active")) {
+                            	    circle_arr[list[i]].classList.add("active");
+                            	    console.log(list[i]);
+                            	    setTimeout(iterateCircles, 2000);
+                            	    return true;
+                            	}
+                        }
+        	        } else if (mode.toLowerCase() == "reset") {
+        	            /* Reset - Remove Active Class & Call New Timer */
+        	            for (i = 0; i < circle_arr.length; ++i) {
+                            circle_arr[i].classList.remove("active");
+                        }
+                        setTimeout(iterateCircles, 2000);
+                        return true;
+        	        } else {
+        	            /* Default / Finish  - Add Active Class To All */
+        	            for (i = 0; i < circle_arr.length; ++i) {
+                            circle_arr[i].classList.add("active");
+                        }
+                        return true;
+        	        }
+        	}
+		</script>
+	</body>
+</html>

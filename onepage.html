@@ -5,31 +5,49 @@
 		<link rel="shortcut icon" href="https://www.crypticstudios.com/img/favicon.ico" />
 	</head>
 	<body>
-		<nav id="nav">
-			<div id="left_section">
-				<img src="https://www.crypticstudios.com/img/logo_cryptic.png" alt="Cryptic Studios Demo" />
-				<span>| UI Art Challenge</span>
-			</div>
-			<ul id="right_section">
-				<li><a href="https://www.crypticstudios.com/games" title="Games">Games</a></li>
-				<li><a href="https://www.crypticstudios.com/contact" title="Contact">Contact</a></li>
-				<li><a href="https://www.crypticstudios.com/careers" title="Careers">Careers</a></li>
-				<li><a href="https://www.linkedin.com/in/isaiahnwukor" title="Isaiah's Linkedin">Resume</a></li>
-			</ul>
-		</nav>
-		<div id="wrapper">
-			<ul id="circle_set">
-				<li class="red"></li>
-				<li class="blue"></li>
-				<li class="yellow"></li>
-				<li class="green"></li>
-			</ul>
+			<nav id="nav">
+				<div id="left_section">
+					<img src="https://www.crypticstudios.com/img/logo_cryptic.png" alt="Cryptic Studios Demo" />
+					<span>| UI Art Challenge</span>
+				</div>
+				<ul id="right_section">
+					<li><a href="https://www.crypticstudios.com/games" title="Games">Games</a></li>
+					<li><a href="https://www.crypticstudios.com/contact" title="Contact">Contact</a></li>
+					<li><a href="https://www.crypticstudios.com/careers" title="Careers">Careers</a></li>
+					<li><a href="https://www.linkedin.com/in/isaiahnwukor" title="Isaiah's Linkedin">Resume</a></li>
+				</ul>
+			</nav>
+			<div id="wrapper">
+				<ul id="circle_set">
+					<li class="red"></li>
+					<li class="blue"></li>
+					<li class="yellow"></li>
+					<li class="green"></li>
+				</ul>
 
-			<div id="button_set">
-				<button onclick="iterateCircles('reset')">Reset</button>
-				<button onclick="iterateCircles('finish')">Finish</button>
+				<div id="button_set">
+					<button class="modal" onclick="modal_open()">Modal</button>
+					<button onclick="iterateCircles('reset')">Reset</button>
+					<button onclick="iterateCircles('finish')">Finish</button>
+				</div>
 			</div>
-		</div>
+			<div id="overlay">
+				<div class="modal_box">
+					<div class="modal_header">
+						<div class="modal_title">
+							Cryptic Studios | UI Modal Box
+						</div>
+						<button onclick="modal_close()" class="close_button">X</button>
+					</div>
+					<div class="modal_message">
+						<p>Some message would go here about the modal!</p>
+					</div>
+					<div class="modal_options">
+						<button onclick="modal_close()" class="btn_ok">OK</button>
+						<button onclick="modal_close()" class="btn_cancel">Cancel</button>
+					</div>
+				</div>
+			</div>
 		<style>
 		/*
         * Author: Isaiah Nwukor
@@ -75,8 +93,75 @@
         div#button_set button {background:#616b5e;color:#ffffff;text-transform:uppercase;letter-spacing:3px;border-radius:7px;margin:5px;padding:10px 40px;font-size:18px;border:1px solid #312d2d4d;}
         div#button_set button:last-child {background:#63b92d;}
         div#button_set button:hover {background:#434348;cursor:pointer;}
-        
+		div#button_set button.modal {background:#b95a2d;}
     
+		/* Modal Box */
+		#overlay {display:none;}
+		#overlay.show {background:rgba(12, 11, 11, 0.7);width:100%;height:100%;position:fixed;top:0;z-index:9;display:block;}
+		
+		.modal_box {
+		border: 1px solid #706a71;
+		border-radius:3px;
+		justify-content: center;
+		align-items: center;
+		width: 500px;
+		max-width: 80%;
+		background:#fff;
+		position:absolute;
+		top:60%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		}
+		.modal_header, .modal_options {
+			display:flex;
+			width: 94%;
+			padding: 1.5% 3%;
+			line-height:2em;
+			font-weight:bold;
+			font-size:1.2em;
+		}
+		.modal_header {
+			border-bottom: 1px solid #a199a2;
+		}
+		.modal_options {
+			border-top: 1px solid #a199a2;
+			display:inline-block;
+		}
+
+		.modal_title{text-align:left;width:90%;padding-right:3%;}
+		.close_button{max-height:35px;min-width:35px;font-weight:bold;background:none;width:7%;border: 2px solid #c23e21;color:#c23e21;border-radius:100px;}
+		.close_button:hover {cursor:pointer;border: 2px solid #ff5f37;color:#ff5f37;}
+		.modal_message {
+			display:block;    
+			width: 94%;
+			padding: 1.5% 3%;
+			line-height:1.5em;
+		}
+
+		.modal_options button {
+			border: 1px solid #483f3f78;
+			padding:10px 25px;
+			border-radius:5px;
+			margin-left:20px;
+			float:right;
+			font-weight:bold;
+		}
+
+		.modal_options button {
+			cursor:pointer;
+		}
+		.modal_options .btn_cancel {
+			color:#ff4b4b;
+			background:#ffffff;
+			border: 1px solid #ff4b4b;
+		}
+		.modal_options .btn_ok {
+			color:#ffffff;
+			background:#2db9b3;
+		}
+
+
+		
         
         @media only screen and (max-width:860px) {
             #nav ul {
@@ -113,12 +198,20 @@
             }
             ul#circle_set {width: 100%;}
             ul#circle_set li {width:calc(50% - 40px);}
+			/* Responsive Modal Buttons */
+			.modal_options {
+				display:inline-grid;
+			}
+			.modal_options button {
+				margin: 5px auto;
+				width:95%;
+			}
         }
 		</style>
 		<script type="text/javascript">
         	/* Kick off the function */
         	iterateCircles();
-        	  
+
         	function iterateCircles(mode = "random"){
         	        /* Get List of Circles by ID and grouped by class into an array */
         			var circle_list = document.getElementById("circle_set");
@@ -155,6 +248,16 @@
                         return true;
         	        }
         	}
+			
+			/* Modal Functions */
+			function modal_open() {
+        			var modal_overlay = document.getElementById("overlay");
+					modal_overlay.classList.add("show");
+			}
+        	function modal_close() {
+        			var modal_overlay = document.getElementById("overlay");
+					modal_overlay.classList.remove("show");
+			}
 		</script>
 	</body>
 </html>

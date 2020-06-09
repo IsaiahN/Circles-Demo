@@ -35,3 +35,12 @@
 	        }
 	}
 	
+	/* Modal Functions */
+	function modal_open() {
+			var modal_overlay = document.getElementById("overlay");
+			modal_overlay.classList.add("show");
+	}
+	function modal_close() {
+			var modal_overlay = document.getElementById("overlay");
+			modal_overlay.classList.remove("show");
+	}

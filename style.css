@@ -42,7 +42,7 @@
     div#button_set button {background:#616b5e;color:#ffffff;text-transform:uppercase;letter-spacing:3px;border-radius:7px;margin:5px;padding:10px 40px;font-size:18px;border:1px solid #312d2d4d;}
     div#button_set button:last-child {background:#63b92d;}
     div#button_set button:hover {background:#434348;cursor:pointer;}
-    
+	div#button_set button.modal {background:#b95a2d;}
 
 	/* Modal Box */
 	#overlay {display:none;}
